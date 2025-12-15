@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-3">📋 Регистрация посещения</h2>
+
+<form method="POST" class="mb-4">
+  <div class="mb-3">
+    <label class="form-label">Выберите клиента:</label>
+    <select name="client_id" class="form-select" required>
+      {% for client in clients %}
+      <option value="{{ client.id }}">
+        {{ client.name }} ({{ client.phone }})
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Отметить посещение</button>
+</form>
+
+<hr>
+
+<h5>Добавить нового клиента</h5>
+<form method="POST" action="{{ url_for('add_client') }}" class="row g-2">
+  <div class="col-md-4">
+    <input type="text" name="name" class="form-control" placeholder="ФИО" required>
+  </div>
+  <div class="col-md-3">
+    <input type="tel" name="phone" class="form-control" placeholder="+7..." required>
+  </div>
+  <div class="col-md-3">
+    <select name="membership_type" class="form-select" required>
+      <option value="">Тип абонемента...</option>
+      <option value="monthly">Месячный</option>
+      <option value="yearly">Годовой</option>
+      <option value="single">Одноразовый</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-success w-100">Добавить</button>
+  </div>
+</form>
+{% endblock %}

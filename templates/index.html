@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-primary text-white p-4 rounded mb-4">
+  <h1 class="h3">🏋️ Система учета посещаемости фитнес‑клуба</h1>
+  <a href="{{ url_for('checkin') }}" class="btn btn-light btn-sm">Перейти к регистрации</a>
+  <a href="{{ url_for('reports') }}" class="btn btn-outline-light btn-sm">Открыть отчеты</a>
+</div>
+{% endblock %}

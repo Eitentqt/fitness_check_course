@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>👤 {{ client.name }}</h2>
+        <p><strong>Телефон:</strong> {{ client.phone }}</p>
+        <p><strong>Дата регистрации:</strong> {{ client.join_date }}</p>
+        
+        {% if client.type %}
+        <div class="alert alert-info">
+            <strong>Абонемент:</strong> {{ client.type }} | 
+            Осталось посещений: {{ client.visits_left }} | 
+            Действителен до: {{ client.end_date }}
+        </div>
+        {% else %}
+        <div class="alert alert-warning">Нет активного абонемента</div>
+        {% endif %}
+    </div>
+</div>
+
+<h4>Последние посещения</h4>
+<table class="table table-striped">
+    <thead>
+        <tr><th>Дата</th><th>Вход</th><th>Выход</th></tr>
+    </thead>
+    <tbody>
+        {% for visit in visits %}
+        <tr>
+            <td>{{ visit.visit_date }}</td>
+            <td>{{ visit.checkin_time or '-' }}</td>
+            <td>{{ visit.checkout_time or '-' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('reports') }}" class="btn btn-secondary">← Назад к отчетам</a>
+{% endblock %}
